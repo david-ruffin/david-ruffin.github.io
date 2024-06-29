@@ -1,0 +1,362 @@
+<html><head><base href="https://websim.ai"><title>Windows XP - WebSim MSP</title><style>
+  body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Tahoma', sans-serif;
+    overflow: hidden;
+    user-select: none;
+  }
+  #desktop {
+    background-image: url('https://archive.org/download/windows-xp-bliss-wallpaper/windows-xp-bliss-4k-lu-1920x1080.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100vh;
+    position: relative;
+  }
+  .icon {
+    width: 80px;
+    height: 80px;
+    margin: 10px;
+    text-align: center;
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    cursor: pointer;
+    position: absolute;
+  }
+  .icon img {
+    width: 48px;
+    height: 48px;
+  }
+  #taskbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background: linear-gradient(to bottom, #2A6DE5, #3B82F6, #2A6DE5);
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+  }
+  #start-button {
+    width: 100px;
+    height: 40px;
+    background: url('https://i.imgur.com/W3FtDft.png') no-repeat;
+    background-size: contain;
+    cursor: pointer;
+  }
+  #start-menu {
+    position: fixed;
+    bottom: 40px;
+    left: 0;
+    width: 320px;
+    height: 480px;
+    background: #D8E4F8;
+    border: 2px solid #0C59B4;
+    border-bottom: none;
+    display: none;
+    z-index: 1001;
+  }
+  .start-item {
+    padding: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+  .start-item:hover {
+    background-color: #316AC5;
+    color: white;
+  }
+  .start-item img {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
+  .window {
+    position: absolute;
+    background: #ECE9D8;
+    border: 2px solid #0C59B4;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+    z-index: 10;
+    min-width: 300px;
+    min-height: 200px;
+  }
+  .window-titlebar {
+    background: linear-gradient(to right, #0C59B4, #3B82F6);
+    color: white;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: move;
+  }
+  .window-content {
+    padding: 10px;
+    overflow: auto;
+    height: calc(100% - 30px);
+  }
+  .close-button {
+    cursor: pointer;
+    padding: 0 5px;
+  }
+  #clock {
+    position: absolute;
+    right: 10px;
+    bottom: 5px;
+    color: white;
+    font-size: 12px;
+  }
+  .resize-handle {
+    width: 10px;
+    height: 10px;
+    background-color: #0C59B4;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    cursor: se-resize;
+  }
+  #browser-window {
+    width: 80%;
+    height: 80%;
+    top: 5%;
+    left: 10%;
+  }
+  #browser-toolbar {
+    background: #ECE9D8;
+    padding: 5px;
+    border-bottom: 1px solid #999;
+  }
+  #browser-content {
+    height: calc(100% - 70px);
+    overflow: auto;
+  }
+</style></head><body><div id="desktop">
+  <div class="icon" style="top: 10px; left: 10px;" onclick="openWindow('my-computer')">
+    <img src="https://i.imgur.com/TYt9OVn.png" alt="My Computer">
+    <div>My Computer</div>
+  </div>
+  <div class="icon" style="top: 100px; left: 10px;" onclick="openWindow('recycle-bin')">
+    <img src="https://i.imgur.com/fZTJFYA.png" alt="Recycle Bin">
+    <div>Recycle Bin</div>
+  </div>
+  <div class="icon" style="top: 190px; left: 10px;" onclick="openWindow('my-documents')">
+    <img src="https://i.imgur.com/1pIaJrc.png" alt="My Documents">
+    <div>My Documents</div>
+  </div>
+  <div class="icon" style="top: 280px; left: 10px;" onclick="openWindow('internet-explorer')">
+    <img src="https://i.imgur.com/9XUXyTx.png" alt="Internet Explorer">
+    <div>Internet Explorer</div>
+  </div>
+  <div class="icon" style="top: 370px; left: 10px;" onclick="openWindow('my-network-places')">
+    <img src="https://i.imgur.com/QAHvUVT.png" alt="My Network Places">
+    <div>My Network Places</div>
+  </div>
+  <div class="icon" style="top: 460px; left: 10px;" onclick="openWindow('control-panel')">
+    <img src="https://i.imgur.com/W0Bzf4x.png" alt="Control Panel">
+    <div>Control Panel</div>
+  </div>
+
+  <div id="taskbar">
+    <div id="start-button" onclick="toggleStartMenu()"></div>
+    <div id="clock"></div>
+  </div>
+
+  <div id="start-menu">
+    <div class="start-item" onclick="openWindow('my-computer')">
+      <img src="https://i.imgur.com/TYt9OVn.png" alt="My Computer">
+      My Computer
+    </div>
+    <div class="start-item" onclick="openWindow('my-documents')">
+      <img src="https://i.imgur.com/1pIaJrc.png" alt="My Documents">
+      My Documents
+    </div>
+    <div class="start-item" onclick="openWindow('control-panel')">
+      <img src="https://i.imgur.com/QAHvUVT.png" alt="Control Panel">
+      Control Panel
+    </div>
+    <div class="start-item" onclick="openWindow('search')">
+      <img src="https://i.imgur.com/W0Bzf4x.png" alt="Search">
+      Search
+    </div>
+    <div class="start-item" onclick="openWindow('run')">
+      <img src="https://i.imgur.com/W8mpPkI.png" alt="Run">
+      Run
+    </div>
+    <div class="start-item" onclick="shutDown()">
+      <img src="https://i.imgur.com/7TpLu7c.png" alt="Shut Down">
+      Shut Down
+    </div>
+  </div>
+
+  <div id="browser-window" class="window">
+    <div class="window-titlebar">
+      <span>Internet Explorer</span>
+      <span class="close-button" onclick="closeWindow('browser-window')">✖</span>
+    </div>
+    <div id="browser-toolbar">
+      <button onclick="alert('Back')">Back</button>
+      <button onclick="alert('Forward')">Forward</button>
+      <button onclick="alert('Refresh')">Refresh</button>
+      <input type="text" value="https://techzen.rstheme.com/" style="width: 300px;">
+      <button onclick="alert('Go')">Go</button>
+    </div>
+    <div id="browser-content">
+      <iframe src="https://techzen.rstheme.com/" width="100%" height="100%" style="border: none;"></iframe>
+    </div>
+    <div class="resize-handle"></div>
+  </div>
+</div>
+
+<script>
+  function toggleStartMenu() {
+    var startMenu = document.getElementById('start-menu');
+    startMenu.style.display = startMenu.style.display === 'none' ? 'block' : 'none';
+  }
+
+  function openWindow(type) {
+    let title, content;
+    switch(type) {
+      case 'my-computer':
+        title = 'My Computer';
+        content = '<div style="display: flex; flex-wrap: wrap;">' +
+                  '<div style="margin: 10px; text-align: center;"><img src="https://i.imgur.com/TYt9OVn.png" width="48" height="48"><div>Local Disk (C:)</div></div>' +
+                  '<div style="margin: 10px; text-align: center;"><img src="https://i.imgur.com/TYt9OVn.png" width="48" height="48"><div>Local Disk (D:)</div></div>' +
+                  '</div>';
+        break;
+      case 'recycle-bin':
+        title = 'Recycle Bin';
+        content = 'The Recycle Bin is empty.';
+        break;
+      case 'my-documents':
+        title = 'My Documents';
+        content = 'No documents found.';
+        break;
+      case 'internet-explorer':
+        document.getElementById('browser-window').style.display = 'block';
+        return;
+      case 'my-network-places':
+        title = 'My Network Places';
+        content = 'No network places are currently available.';
+        break;
+      case 'control-panel':
+        title = 'Control Panel';
+        content = '<div style="display: flex; flex-wrap: wrap;">' +
+                  '<div style="margin: 10px; text-align: center;"><img src="https://i.imgur.com/QAHvUVT.png" width="48" height="48"><div>Add or Remove Programs</div></div>' +
+                  '<div style="margin: 10px; text-align: center;"><img src="https://i.imgur.com/W0Bzf4x.png" width="48" height="48"><div>Display</div></div>' +
+                  '<div style="margin: 10px; text-align: center;"><img src="https://i.imgur.com/W8mpPkI.png" width="48" height="48"><div>System</div></div>' +
+                  '</div>';
+        break;
+      case 'search':
+        title = 'Search';
+        content = '<input type="text" placeholder="Search for files or folders" style="width: 100%;">';
+        break;
+      case 'run':
+        title = 'Run';
+        content = '<input type="text" placeholder="Type the name of a program, folder, document, or Internet resource" style="width: 100%;">';
+        break;
+      default:
+        title = 'Window';
+        content = 'Window content';
+    }
+
+    const windowId = 'window-' + Date.now();
+    const windowHTML = `
+      <div id="${windowId}" class="window" style="width: 500px; height: 400px; top: 50px; left: 50px;">
+        <div class="window-titlebar">
+          <span>${title}</span>
+          <span class="close-button" onclick="closeWindow('${windowId}')">✖</span>
+        </div>
+        <div class="window-content">
+          ${content}
+        </div>
+        <div class="resize-handle"></div>
+      </div>
+    `;
+
+    document.body.insertAdjacentHTML('beforeend', windowHTML);
+    const windowElement = document.getElementById(windowId);
+    dragElement(windowElement);
+    resizeElement(windowElement);
+  }
+
+  function closeWindow(id) {
+    document.getElementById(id).style.display = 'none';
+  }
+
+  function shutDown() {
+    alert('Shutting down...');
+    document.body.innerHTML = '<div style="background:black;color:white;height:100vh;display:flex;justify-content:center;align-items:center;">It is now safe to turn off your computer.</div>';
+    var audio = new Audio('https://www.myinstants.com/media/sounds/windows-xp-shutdown.mp3');
+    audio.play();
+  }
+
+  function updateClock() {
+    const now = new Date();
+    const timeString = now.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    document.getElementById('clock').textContent = timeString;
+  }
+
+  function dragElement(elmnt) {
+    var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.querySelector('.window-titlebar').onmousedown = dragMouseDown;
+
+    function dragMouseDown(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      document.onmouseup = closeDragElement;
+      document.onmousemove = elementDrag;
+    }
+
+    function elementDrag(e) {
+      e = e || window.event;
+      e.preventDefault();
+      pos1 = pos3 - e.clientX;
+      pos2 = pos4 - e.clientY;
+      pos3 = e.clientX;
+      pos4 = e.clientY;
+      elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+      elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+    }
+
+    function closeDragElement() {
+      document.onmouseup = null;
+      document.onmousemove = null;
+    }
+  }
+
+  function resizeElement(elmnt) {
+    const resizeHandle = elmnt.querySelector('.resize-handle');
+    resizeHandle.addEventListener('mousedown', initResize, false);
+
+    function initResize(e) {
+      window.addEventListener('mousemove', resize, false);
+      window.addEventListener('mouseup', stopResize, false);
+    }
+
+    function resize(e) {
+      elmnt.style.width = (e.clientX - elmnt.offsetLeft) + 'px';
+      elmnt.style.height = (e.clientY - elmnt.offsetTop) + 'px';
+    }
+
+    function stopResize(e) {
+      window.removeEventListener('mousemove', resize, false);
+      window.removeEventListener('mouseup', stopResize, false);
+    }
+  }
+
+  // Play startup sound and initialize browser window
+  window.addEventListener('load', function() {
+    var audio = new Audio('https://www.myinstants.com/media/sounds/windows-xp-startup.mp3');
+    audio.play();
+    updateClock();
+    setInterval(updateClock, 1000);
+    
+    const browserWindow = document.getElementById('browser-window');
+    dragElement(browserWindow);
+    resizeElement(browserWindow);
+    browserWindow.style.display = 'block'; // Show the browser window by default
+  });
+</script></body></html>
