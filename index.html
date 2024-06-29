@@ -1,4 +1,4 @@
-<html><head><base href="https://websim.ai"><title>Windows XP - WebSim MSP</title><style>
+<html><head><base href="https://websim.ai"><title>Windows XP - WebSim MSP</title><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><style>
   body, html {
     margin: 0;
     padding: 0;
@@ -15,18 +15,19 @@
     position: relative;
   }
   .icon {
-    width: 80px;
-    height: 80px;
-    margin: 10px;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
     text-align: center;
     color: white;
     text-shadow: 1px 1px 1px black;
     cursor: pointer;
     position: absolute;
+    font-size: 12px;
   }
   .icon img {
-    width: 48px;
-    height: 48px;
+    width: 32px;
+    height: 32px;
   }
   #taskbar {
     position: fixed;
@@ -40,7 +41,7 @@
     z-index: 1000;
   }
   #start-button {
-    width: 100px;
+    width: 70px;
     height: 40px;
     background: url('https://i.imgur.com/W3FtDft.png') no-repeat;
     background-size: contain;
@@ -50,13 +51,16 @@
     position: fixed;
     bottom: 40px;
     left: 0;
-    width: 320px;
-    height: 480px;
+    width: 80%;
+    max-width: 320px;
+    height: 70%;
+    max-height: 480px;
     background: #D8E4F8;
     border: 2px solid #0C59B4;
     border-bottom: none;
     display: none;
     z-index: 1001;
+    overflow-y: auto;
   }
   .start-item {
     padding: 10px;
@@ -69,8 +73,8 @@
     color: white;
   }
   .start-item img {
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     margin-right: 10px;
   }
   .window {
@@ -79,8 +83,10 @@
     border: 2px solid #0C59B4;
     box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
     z-index: 10;
-    min-width: 300px;
-    min-height: 200px;
+    width: 90%;
+    height: 80%;
+    top: 5%;
+    left: 5%;
   }
   .window-titlebar {
     background: linear-gradient(to right, #0C59B4, #3B82F6);
@@ -90,6 +96,7 @@
     justify-content: space-between;
     align-items: center;
     cursor: move;
+    font-size: 14px;
   }
   .window-content {
     padding: 10px;
@@ -117,44 +124,64 @@
     cursor: se-resize;
   }
   #browser-window {
-    width: 80%;
+    width: 90%;
     height: 80%;
     top: 5%;
-    left: 10%;
+    left: 5%;
   }
   #browser-toolbar {
     background: #ECE9D8;
     padding: 5px;
     border-bottom: 1px solid #999;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+  }
+  #browser-toolbar input {
+    flex-grow: 1;
+    min-width: 100px;
   }
   #browser-content {
-    height: calc(100% - 70px);
+    height: calc(100% - 80px);
     overflow: auto;
+  }
+  @media (max-width: 600px) {
+    .icon {
+      width: 50px;
+      height: 50px;
+      font-size: 10px;
+    }
+    .icon img {
+      width: 24px;
+      height: 24px;
+    }
+    #start-button {
+      width: 50px;
+    }
+    .window-titlebar {
+      font-size: 12px;
+    }
+    #browser-toolbar button {
+      padding: 5px;
+      font-size: 12px;
+    }
   }
 </style></head><body><div id="desktop">
   <div class="icon" style="top: 10px; left: 10px;" onclick="openWindow('my-computer')">
     <img src="https://i.imgur.com/TYt9OVn.png" alt="My Computer">
     <div>My Computer</div>
   </div>
-  <div class="icon" style="top: 100px; left: 10px;" onclick="openWindow('recycle-bin')">
+  <div class="icon" style="top: 80px; left: 10px;" onclick="openWindow('recycle-bin')">
     <img src="https://i.imgur.com/fZTJFYA.png" alt="Recycle Bin">
     <div>Recycle Bin</div>
   </div>
-  <div class="icon" style="top: 190px; left: 10px;" onclick="openWindow('my-documents')">
+  <div class="icon" style="top: 150px; left: 10px;" onclick="openWindow('my-documents')">
     <img src="https://i.imgur.com/1pIaJrc.png" alt="My Documents">
     <div>My Documents</div>
   </div>
-  <div class="icon" style="top: 280px; left: 10px;" onclick="openWindow('internet-explorer')">
+  <div class="icon" style="top: 220px; left: 10px;" onclick="openWindow('internet-explorer')">
     <img src="https://i.imgur.com/9XUXyTx.png" alt="Internet Explorer">
     <div>Internet Explorer</div>
-  </div>
-  <div class="icon" style="top: 370px; left: 10px;" onclick="openWindow('my-network-places')">
-    <img src="https://i.imgur.com/QAHvUVT.png" alt="My Network Places">
-    <div>My Network Places</div>
-  </div>
-  <div class="icon" style="top: 460px; left: 10px;" onclick="openWindow('control-panel')">
-    <img src="https://i.imgur.com/W0Bzf4x.png" alt="Control Panel">
-    <div>Control Panel</div>
   </div>
 
   <div id="taskbar">
@@ -198,7 +225,7 @@
       <button onclick="alert('Back')">Back</button>
       <button onclick="alert('Forward')">Forward</button>
       <button onclick="alert('Refresh')">Refresh</button>
-      <input type="text" value="https://techzen.rstheme.com/" style="width: 300px;">
+      <input type="text" value="https://techzen.rstheme.com/" style="width: 100%;">
       <button onclick="alert('Go')">Go</button>
     </div>
     <div id="browser-content">
@@ -235,10 +262,6 @@
       case 'internet-explorer':
         document.getElementById('browser-window').style.display = 'block';
         return;
-      case 'my-network-places':
-        title = 'My Network Places';
-        content = 'No network places are currently available.';
-        break;
       case 'control-panel':
         title = 'Control Panel';
         content = '<div style="display: flex; flex-wrap: wrap;">' +
@@ -262,7 +285,7 @@
 
     const windowId = 'window-' + Date.now();
     const windowHTML = `
-      <div id="${windowId}" class="window" style="width: 500px; height: 400px; top: 50px; left: 50px;">
+      <div id="${windowId}" class="window">
         <div class="window-titlebar">
           <span>${title}</span>
           <span class="close-button" onclick="closeWindow('${windowId}')">✖</span>
@@ -299,64 +322,53 @@
 
   function dragElement(elmnt) {
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+    elmnt.querySelector('.window-titlebar').ontouchstart = dragMouseDown;
     elmnt.querySelector('.window-titlebar').onmousedown = dragMouseDown;
 
     function dragMouseDown(e) {
       e = e || window.event;
       e.preventDefault();
-      pos3 = e.clientX;
-      pos4 = e.clientY;
+      pos3 = e.clientX || e.touches[0].clientX;
+      pos4 = e.clientY || e.touches[0].clientY;
+      document.ontouchend = closeDragElement;
       document.onmouseup = closeDragElement;
+      document.ontouchmove = elementDrag;
       document.onmousemove = elementDrag;
     }
 
     function elementDrag(e) {
       e = e || window.event;
       e.preventDefault();
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
+      pos1 = pos3 - (e.clientX || e.touches[0].clientX);
+      pos2 = pos4 - (e.clientY || e.touches[0].clientY);
+      pos3 = e.clientX || e.touches[0].clientX;
+      pos4 = e.clientY || e.touches[0].clientY;
       elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
       elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
     }
 
     function closeDragElement() {
+      document.ontouchend = null;
       document.onmouseup = null;
+      document.ontouchmove = null;
       document.onmousemove = null;
     }
   }
 
   function resizeElement(elmnt) {
     const resizeHandle = elmnt.querySelector('.resize-handle');
+    resizeHandle.addEventListener('touchstart', initResize, false);
     resizeHandle.addEventListener('mousedown', initResize, false);
 
     function initResize(e) {
+      window.addEventListener('touchmove', resize, false);
       window.addEventListener('mousemove', resize, false);
+      window.addEventListener('touchend', stopResize, false);
       window.addEventListener('mouseup', stopResize, false);
     }
 
     function resize(e) {
-      elmnt.style.width = (e.clientX - elmnt.offsetLeft) + 'px';
-      elmnt.style.height = (e.clientY - elmnt.offsetTop) + 'px';
-    }
-
-    function stopResize(e) {
-      window.removeEventListener('mousemove', resize, false);
-      window.removeEventListener('mouseup', stopResize, false);
-    }
-  }
-
-  // Play startup sound and initialize browser window
-  window.addEventListener('load', function() {
-    var audio = new Audio('https://www.myinstants.com/media/sounds/windows-xp-startup.mp3');
-    audio.play();
-    updateClock();
-    setInterval(updateClock, 1000);
-    
-    const browserWindow = document.getElementById('browser-window');
-    dragElement(browserWindow);
-    resizeElement(browserWindow);
-    browserWindow.style.display = 'block'; // Show the browser window by default
-  });
-</script></body></html>
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      elmnt.style.width = (clientX - elmnt.offsetLeft) + 'px';
+      elmnt.style.height = (clientY - elmnt.offsetTop)
